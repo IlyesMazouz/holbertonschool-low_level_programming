@@ -1,4 +1,4 @@
-#include <betty>
+#include <betty-style>
 
 /**
  * main - Entry point
