@@ -1,4 +1,4 @@
-#include <betty-style>
+#include <stdio.h>
 
 /**
  * main - Entry point
