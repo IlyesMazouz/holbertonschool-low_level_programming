@@ -9,14 +9,18 @@
 int main(void)
 {
 	int c;
+	int fI = 1;
 
-	for (c = '0'; c <= '8'; c++)
+	for (c = '0'; c <= '9'; c++)
 	{
-		putchar (c);
-		putchar (',');
-		putchar (' ');
+		if (fI != 1)
+		{
+			putchar (',');
+			putchar (' ');
+		}
+		putchar(c);
+		fI = 0;
 	}
-	putchar ('9');
 	putchar('\n');
 	return (0);
 }
