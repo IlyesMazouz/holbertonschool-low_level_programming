@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* print_alphabet - No desc
+* print_alphabet_x10 - No desc
 *
 * Return: defaut
 */
