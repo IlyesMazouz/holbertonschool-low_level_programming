@@ -1,20 +1,21 @@
-#include"main.h"
+#include "main.h"
 
 /**
-* main - Entry point
+* print_alphabet - No desc
 *
-* Return: Alwyas 0 (Success)
+* Return: defaut
 */
 
-void print_alphabet(void);
+void print_alphabet(void)
 
 {
-	char c;
+	int c;
 
-	for (c = 'a'; c <= 'z'; c++)
-	putchar (c);
-	putchar ('\n');
-	return (0);
+	for (c = 97; c <= 122; c++)
+		{
+		_putchar(c);
+		}
+	_putchar('\n');
 }
 
 
