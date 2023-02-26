@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* int print_sign(int n) - no desc
+* print_sign - no desc
 * @n: int
 * Return: n value
 */
