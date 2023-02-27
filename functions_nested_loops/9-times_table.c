@@ -1,23 +1,31 @@
 #include "main.h"
 
 /**
-*times_table - times table
+*times_table - times table from zero to nine
 *
 */
 
-void jack_bauer(void)
+void times_table(void)
 {
-	int n, m;
+	int n, m, r;
 
-	for (n = 0; n < 9; n++)
+	for (n = 0; n <= 9; n++)
 	{
-		for (m = 0; m < 9; m++)
+		_putchar ('0');
+
+		for (m = 1; m <= 9; m++)
 		{
-			_putchar ((n * m) + '0');
 			_putchar (',');
 			_putchar (' ');
-			_putchar ('\n');
 
+			r = n * m;
+		if (r <= 9)
+			_putchar (' ');
+		else
+			_putchar ((r / 10) + '0');
+		_putchar ((r % 10) + '0');
 		}
+	_putchar ('\n');
+
 	}
 }
