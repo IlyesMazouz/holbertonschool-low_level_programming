@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stddef.h>
+#include "stdlib.h"
 
 /**
 *_strchr - locating a charachter in a string
