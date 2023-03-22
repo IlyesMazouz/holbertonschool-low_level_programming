@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
-*find - help locat the square root of n
+*sqrt_helper - help locat the square root of n
 *@start: an int
 *@end: an int
 *@n: an int
 *Return: int
 */
 
-int find(int n, int start, int end)
+int sqrt_helper(int n, int start, int end)
 {
 	int mid, square;
 
