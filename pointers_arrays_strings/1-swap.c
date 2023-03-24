@@ -1,16 +1,12 @@
 #include "main.h"
 
-/**
-*swap_int - swapping integers
-*@a: int
-*@b: int
-*/
+/*just testing codes*/
 
 void swap_int(int *a, int *b)
 {
-	int n;
+	int z;
 
-	n = *a;
+	z = *a;
 	*a = *b;
-	*b = n;
+	*b = z;
 }

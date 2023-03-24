@@ -1,9 +1,6 @@
 #include "main.h"
 
-/**
-*reset_to_98 - 98 pointers to n
-*@n: int
-*/
+/*im only testing my codes*/
 
 void reset_to_98(int *n)
 {
