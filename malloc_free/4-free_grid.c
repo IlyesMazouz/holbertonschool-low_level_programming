@@ -4,7 +4,7 @@
 /**
 *free_grid - freeing an allocated memory area
 *@grid: a pointer
-*@@height: an integer
+*@height: an integer
 */
 
 void free_grid(int **grid, int height)
