@@ -3,7 +3,7 @@
 #include "string.h"
 
 /**
-**string_nconcat -
+**string_nconcat - concatinating two strings and allocating the memory
 *@s1: a pointer
 *@s2: a pointer
 *@n: an unsigned int
