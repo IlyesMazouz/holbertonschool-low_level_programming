@@ -4,7 +4,7 @@
 #include "stdio.h"
 
 /**
-*print_numbers - a function that prints sum of arguments
+*print_numbers - a function that prints the total number of arguments
 *@separator: a pointer
 *@n: an integer
 */
