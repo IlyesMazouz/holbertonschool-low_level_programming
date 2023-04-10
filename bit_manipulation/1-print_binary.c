@@ -7,7 +7,7 @@
 
 void print_binary(unsigned long int n)
 {
-	unsigned long int mask = 1UL << 31;
+	unsigned long int mask = 1UL << 63;
 	int flag = 0;
 
 	if (n == 0)
