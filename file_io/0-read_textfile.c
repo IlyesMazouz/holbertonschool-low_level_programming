@@ -3,34 +3,34 @@
 /**
 * read_textfile - function that prints text to POSIX standard output
 *@filename: a pointer
-*@letters: size_t
+*@letters: a string
 *Return: value of bytes_read
 */
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *file;
-	char buffer[1024];
-	size_t total_read = 0;
-	ssize_t bytes_read;
+	ssize_t file_fd, bytes_read, bytes_written;
+	char *buff;
 
 	if (filename == NULL)
 		return (0);
-
-	file = fopen(filename, "r");
-	if (file == NULL)
-		return (0);
-	while (bytes_read > 0 && total_read < letters)
-	bytes_read = fread(buffer, 1, sizeof(buffer), file);
+	buff = malloc(sizeof(char) * letters);
+	if (!buff)
 	{
-	if ((size_t)fwrite(buffer, 1, bytes_read, stdout) != (size_t)bytes_read)
-	{
-		fclose(file);
 		return (0);
 	}
-	total_read += bytes_read;
+	file_fd = open(filename, O_RDONLY);
+	bytes_read = read(file_fd, buff, letters);
+	if (file_fd < 0 || bytes_read < 0)
+	{
+	bytes_written = write(STDERR_FILENO, buff, bytes_read);
+	free(buff);
+	return (0);
 	}
-
-	fclose(file);
-	return (total_read);
+	else
+	{
+	bytes_written = write(STDOUT_FILENO, buff, bytes_read);
+	close(file_fd);
+	}
+	return (bytes_written);
 }
