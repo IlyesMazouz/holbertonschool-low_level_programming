@@ -2,15 +2,32 @@
 #define BUF_SIZE 1024
 
 /**
-*error - prints an error message and exits with a given code
-*@msg: the error message to print
-*@code: the exit code to use
-*/
+*__exit - function that prints error messages and exits with exit value
+*@error: num is either exit value or file descriptor
+*@s: str is a name, either of the two filenames
+*@fd: file descriptor
+*Return: 0 on success
+**/
 
-void error(char *msg, int code)
+int __exit(int error, char *s, int fd)
 {
-	dprintf(STDERR_FILENO, "%s\n", msg);
-	exit(code);
+	switch (error)
+	{
+	case 97:
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(error);
+	case 98:
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", s);
+		exit(error);
+	case 99:
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", s);
+		exit(error);
+	case 100:
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(error);
+	default:
+		return (0);
+	}
 }
 
 /**
@@ -23,43 +40,30 @@ void error(char *msg, int code)
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to, bytes_read, bytes_written;
-	char buffer[BUF_SIZE];
+	char buffer[1024];
 
 	if (argc != 3)
-	{
-		error("Usage: cp file_from file_to", 97);
-	}
+		__exit(97, NULL, 0);
+
+	fd_to = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
+	if (fd_to == -1)
+		__exit(99, argv[2], 0);
 
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
-	{
-		error("Error: Can't read from file %s", 98);
-	}
+		__exit(98, argv[1], 0);
 
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_to == -1)
+	while ((bytes_read = read(fd_from, buffer, 1024)) != 0)
 	{
-		error("Error: Can't write to file %s", 99);
-	}
+		if (bytes_read == -1)
+			__exit(98, argv[1], 0);
 
-	while ((bytes_read = read(fd_from, buffer, BUF_SIZE)) > 0)
-	{
 		bytes_written = write(fd_to, buffer, bytes_read);
-	if (bytes_written == -1 || bytes_written != bytes_read)
-	{
-		error("Error: Can't write to file %s", 99);
-	}
+		if (bytes_written == -1)
+			__exit(99, argv[2], 0);
 	}
 
-	if (bytes_read == -1)
-	{
-		error("Error: Can't read from file %s", 98);
-	}
-
-	if (close(fd_from) == -1 || close(fd_to) == -1)
-	{
-		error("Error: Can't close file descriptor", 100);
-	}
-
+	close(fd_to) == -1 ? (__exit(100, NULL, fd_to)) : close(fd_to);
+	close(fd_from) == -1 ? (__exit(100, NULL, fd_from)) : close(fd_from);
 	return (0);
 }
